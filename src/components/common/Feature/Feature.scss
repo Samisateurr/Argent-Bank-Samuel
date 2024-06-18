@@ -1,0 +1,50 @@
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/mixins.scss';
+
+.features {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 920px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+    width: 100%;
+    box-sizing: border-box;  // Pour que le padding soit inclus dans la largeur
+    flex-grow: 1;  // Pour que chaque item prenne la même hauteur
+
+    @media (min-width: 920px) {
+        width: 33%;
+    }
+
+    .feature-icon {
+        width: 100px;
+        border: 10px solid $secondary-color;
+        border-radius: 50%;
+        padding: 1rem;
+        margin-bottom: 1rem;  
+    }
+
+    .feature-item-title {
+        color: #222;
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        flex-grow: 1;  // Assure que le texte occupe tout l'espace disponible
+    }
+}
