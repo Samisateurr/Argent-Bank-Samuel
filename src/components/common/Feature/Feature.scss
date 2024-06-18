@@ -23,7 +23,7 @@
     padding: 2.5rem;
     width: 100%;
     box-sizing: border-box;  // Pour que le padding  inclus dans la largeur
-    flex-grow: 1;  // Pour que chaque item prenne la même hauteur
+    flex-grow: 1;  // Pour que chaque items prenne la même hauteur
 
     @media (min-width: 920px) {
         width: 33%;
