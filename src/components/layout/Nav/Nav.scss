@@ -4,7 +4,7 @@
 .sr-only {
     @include sr-only;
   }
-  
+
 .main-nav {
     display: flex;
     justify-content: space-between;
@@ -23,6 +23,11 @@
       &:hover {
         text-decoration: underline;
       }
+
+      .fa {
+        margin-right: 0.5rem;
+      }
+
     }
   
     .main-nav-logo {

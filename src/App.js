@@ -7,6 +7,7 @@ import Footer from './components/layout/Footer/Footer';
 import chatIcon from './assets/images/icon-chat.png';
 import moneyIcon from './assets/images/icon-money.png';
 import securityIcon from './assets/images/icon-security.png';
+import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
   return (
