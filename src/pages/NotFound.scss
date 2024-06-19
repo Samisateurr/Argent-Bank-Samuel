@@ -1,0 +1,17 @@
+@import '../assets/styles/variables';
+@import '../assets/styles/mixins';
+
+.not-found {
+  text-align: center;
+  margin-top: 50px;
+  
+  h1 {
+    font-size: 3rem;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 2rem;
+    color: $secondary-color;
+  }
+}
