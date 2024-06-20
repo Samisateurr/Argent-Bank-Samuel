@@ -1,0 +1,64 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 1rem;
+  
+    label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      font-size: 1rem; // Adjust the font size if necessary
+      color: #2c3e50; // Same color as the main text
+    }
+  
+    input {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+  
+      &:focus {
+        border-color: #00bc77; // Highlight color on focus
+        outline: none; // Remove default outline
+      }
+    }
+  }
+
+  .main {
+    flex: 1;
+  }
+  
+  .bg-dark {
+    background-color: #12002b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); // Adjust height based on your header and footer height
+  }
+  
+  .sign-in-content {
+    box-sizing: border-box;
+    background-color: white;
+    width: 300px;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sign-in-icon {
+    font-size: 4rem;
+    color: #00bc77;
+    margin-bottom: 1rem;
+  }
+  
+  .input-remember {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .input-remember label {
+    margin-left: 0.5rem;
+  }
