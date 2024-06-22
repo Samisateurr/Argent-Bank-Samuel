@@ -7,8 +7,8 @@
     label {
       font-weight: bold;
       margin-bottom: 0.5rem;
-      font-size: 1rem; // Adjust the font size if necessary
-      color: #2c3e50; // Same color as the main text
+      font-size: 1rem; 
+      color: #2c3e50; 
     }
   
     input {
@@ -19,8 +19,8 @@
       transition: border-color 0.3s;
   
       &:focus {
-        border-color: #00bc77; // Highlight color on focus
-        outline: none; // Remove default outline
+        border-color: #00bc77; 
+        outline: none; 
       }
     }
   }
