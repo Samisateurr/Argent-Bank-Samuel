@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import User from './pages/User';
-import NotFound from './pages/NotFound';
+import Home from './pages/Home/Home';
+import SignIn from './pages/SignIn/SignIn';
+import User from './pages/User/User';
+import NotFound from './pages/NotFound/NotFound';
 import 'font-awesome/css/font-awesome.min.css';
 
 function App() {

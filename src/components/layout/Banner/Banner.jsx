@@ -1,18 +1,25 @@
 import React from 'react';
-import '../Banner/Banner.scss';
+import PropTypes from 'prop-types';
+import './Banner.scss';
 
-function Banner() {
+function Banner({ title = 'Promoted Content', subtitles = [], text }) {
   return (
     <div className="hero">
       <section className="hero-content">
-        <h2 className="sr-only">Promoted Content</h2>
-        <p className="subtitle">No fees.</p>
-        <p className="subtitle">No minimum deposit.</p>
-        <p className="subtitle">High interest rates.</p>
-        <p className="text">Open a savings account with Argent Bank today!</p>
+        {title && <h2 className="sr-only">{title}</h2>}
+        {subtitles.map((subtitle, index) => (
+          <p key={index} className="subtitle">{subtitle}</p>
+        ))}
+        <p className="text">{text}</p>
       </section>
     </div>
   );
 }
+
+Banner.propTypes = {
+  title: PropTypes.string,
+  subtitles: PropTypes.arrayOf(PropTypes.string),
+  text: PropTypes.string.isRequired,
+};
 
 export default Banner;

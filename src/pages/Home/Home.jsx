@@ -1,19 +1,29 @@
 import React from 'react';
-import Nav from '../components/layout/Nav/Nav';
-import Banner from '../components/layout/Banner/Banner';
-import Feature from '../components/common/Feature/Feature';
-import Footer from '../components/layout/Footer/Footer';
-import chatIcon from '../assets/images/icon-chat.png';
-import moneyIcon from '../assets/images/icon-money.png';
-import securityIcon from '../assets/images/icon-security.png';
-import '../assets/styles/main.scss';
+import Nav from '../../components/layout/Nav/Nav';
+import Banner from '../../components/layout/Banner/Banner';
+import Feature from '../../components/common/Feature/Feature';
+import Footer from '../../components/layout/Footer/Footer';
+import chatIcon from '../../assets/images/icon-chat.png';
+import moneyIcon from '../../assets/images/icon-money.png';
+import securityIcon from '../../assets/images/icon-security.png';
+import '../../assets/styles/main.scss';
 
 function Home() {
+  const bannerSubtitles = [
+    "No fees.",
+    "No minimum deposit.",
+    "High interest rates."
+  ];
+
   return (
     <div className="Home">
       <Nav />
       <main>
-        <Banner />
+        <Banner
+          title="Promoted Content"
+          subtitles={bannerSubtitles}
+          text="Open a savings account with Argent Bank today!"
+        />
         <section className="features">
           <h2 className="sr-only">Features</h2>
           <Feature

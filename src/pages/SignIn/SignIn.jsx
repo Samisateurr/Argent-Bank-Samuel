@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import InputField from '../components/common/InputField/InputField';
-import Nav from '../components/layout/Nav/Nav';
-import Footer from '../components/layout/Footer/Footer';
-import Button from '../components/common/Button/Button';
-import '../pages/SignIn.scss';
+import InputField from '../../components/common/InputField/InputField';
+import Nav from '../../components/layout/Nav/Nav';
+import Footer from '../../components/layout/Footer/Footer';
+import Button from '../../components/common/Button/Button';
+import '../SignIn/SignIn.scss';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');

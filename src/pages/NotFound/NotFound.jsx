@@ -1,6 +1,6 @@
 import React from 'react';
-import Nav from '../components/layout/Nav/Nav';
-import Footer from '../components/layout/Footer/Footer';
+import Nav from '../../components/layout/Nav/Nav';
+import Footer from '../../components/layout/Footer/Footer';
 import './NotFound.scss';
 
 function NotFound() {

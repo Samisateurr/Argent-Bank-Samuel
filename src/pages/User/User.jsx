@@ -1,10 +1,10 @@
 import React from 'react';
-import Nav from '../components/layout/Nav/Nav';
-import Footer from '../components/layout/Footer/Footer';
-import Account from '../components/common/Account/Account';
-import accountData from '../../src/helpers/accountData';
-import Button from '../components/common/Button/Button';
-import '../pages/User.scss';
+import Nav from '../../components/layout/Nav/Nav';
+import Footer from '../../components/layout/Footer/Footer';
+import Account from '../../components/common/Account/Account';
+import accountData from '../../helpers/accountData';
+import Button from '../../components/common/Button/Button';
+import '../User/User.scss';
 
 const User = () => {
   return (
