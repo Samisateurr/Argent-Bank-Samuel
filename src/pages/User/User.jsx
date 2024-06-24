@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Nav from '../../components/layout/Nav/Nav';
 import Footer from '../../components/layout/Footer/Footer';
 import Account from '../../components/common/Account/Account';
@@ -7,6 +9,15 @@ import Button from '../../components/common/Button/Button';
 import '../User/User.scss';
 
 const User = () => {
+  const isAuthenticated = useSelector((state) => state.user.loggedIn);
+  const navigate = useNavigate();
+
+  // Vérifie si l'utilisateur est authentifié, sinon redirige vers la page de connexion
+  if (!isAuthenticated) {
+    navigate('/signin'); // Redirige vers la page de connexion
+    return null; // Peut afficher un loader ou un message de chargement ici
+  }
+
   return (
     <>
       <Nav />
