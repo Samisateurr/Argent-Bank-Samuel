@@ -3,15 +3,16 @@ import axiosInstance from '../api/axiosConfig';
 
 export const loginAsync = (credentials) => async (dispatch) => {
   try {
-    const response = await axiosInstance.post('http://localhost:3001/api/v1/user/login', credentials, {
+    const response = await axiosInstance.post('/user/login', credentials, {
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    dispatch(login(response.data.token)); // Stocker le token dans l'état Redux
+    dispatch(login(response.data.token));
+    return { success: true }; // Retourner un indicateur de succès
   } catch (error) {
     console.error('Erreur lors de l\'authentification :', error);
-    // Dispatch une action pour gérer l'erreur si nécessaire
+    return { success: false, message: error.response?.data?.message || 'Authentication failed' };
   }
 };
 
@@ -25,7 +26,7 @@ const userSlice = createSlice({
   reducers: {
     login(state, action) {
       state.loggedIn = true;
-      state.token = action.payload; // Stocker le token dans l'état Redux
+      state.token = action.payload;
     },
     logout(state) {
       state.loggedIn = false;
@@ -35,5 +36,4 @@ const userSlice = createSlice({
 });
 
 export const { login, logout } = userSlice.actions;
-
 export default userSlice.reducer;
