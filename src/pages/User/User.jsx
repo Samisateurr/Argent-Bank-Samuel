@@ -20,16 +20,12 @@ const User = () => {
     return null; // Peut afficher un loader ou un message de chargement ici
   }
 
-  const userName = `${firstName} ${lastName}`.trim() || 'Tony Jarvis';
-
-  console.log('User Name:', userName); // Log du nom de l'utilisateur
-
   return (
     <>
       <Nav />
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br />{userName}!</h1>
+          <h1>Welcome back<br />{firstName} {lastName}!</h1>
           <Button className="edit-button">Edit Name</Button>
         </div>
         <h2 className="sr-only">Accounts</h2>

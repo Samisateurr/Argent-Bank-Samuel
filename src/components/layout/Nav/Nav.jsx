@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../../assets/images/argentBankLogo.png';
 import Icon from '../../common/Icon/Icon';
 import '../Nav/Nav.scss';
-import { logout } from '../../../slices/userSlice'; // Assurez-vous d'importer logout depuis votre slice Redux
+import { logout } from '../../../slices/userSlice';
 
 function Nav() {
   const isAuthenticated = useSelector((state) => state.user.loggedIn);
+  const userName = useSelector((state) => state.user.userName);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
-    // Code supplémentaire pour gérer la déconnexion si nécessaire
   };
 
   return (
@@ -21,11 +21,18 @@ function Nav() {
         <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div>
+      <div className="nav-items">
         {isAuthenticated ? (
-          <button onClick={handleLogout} className="main-nav-item sign-out-button">
-            Sign Out
-          </button>
+          <>
+            <Link to="/user" className="main-nav-item user-name-button">
+              <Icon name="user-circle" />
+              {userName}
+            </Link>
+            <button onClick={handleLogout} className="main-nav-item sign-out-button">
+              <Icon name="sign-out" />
+              Sign Out
+            </button>
+          </>
         ) : (
           <Link to="/sign-in" className="main-nav-item sign-in-button">
             <Icon name="user-circle" />

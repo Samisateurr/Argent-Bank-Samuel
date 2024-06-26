@@ -17,14 +17,22 @@
     }
   }
 
+  .nav-items {
+    display: flex;
+    align-items: center;
+  }
+
   .main-nav-item {
     text-decoration: none;
     margin-right: 0.5rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
     color: $primary-color;
 
     &:hover {
       text-decoration: underline;
+      color: #00bc77;
     }
 
     .fa {
@@ -32,8 +40,7 @@
     }
   }
 
-  .sign-in-button,
-  .sign-out-button {
+  .sign-in-button {
     text-decoration: none;
     margin-right: 0.5rem;
     font-weight: bold;
@@ -46,14 +53,46 @@
 
     &:hover {
       text-decoration: underline;
+      color: #00bc77;
     }
   }
 
   .sign-out-button {
+    text-decoration: none;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
     color: $primary-color;
     cursor: pointer;
     border: none;
     background: none;
+
+    .fa {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      color: #00bc77;
+    }
+  }
+
+  .user-name-button {
+    text-decoration: none;
+    margin-right: 0.5rem;
     font-weight: bold;
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+
+    .fa {
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      color: #00bc77;
+    }
   }
 }

@@ -34,9 +34,9 @@ export const loginAsync = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    name: '',
     firstName: '',
     lastName: '',
+    userName: '', // Ajoutez cette ligne
     loggedIn: false,
     token: null,
     error: null,
@@ -45,9 +45,9 @@ const userSlice = createSlice({
     logout(state) {
       state.loggedIn = false;
       state.token = null;
-      state.name = '';
       state.firstName = '';
       state.lastName = '';
+      state.userName = ''; // Réinitialisez également le userName
     },
   },
   extraReducers: (builder) => {
@@ -55,10 +55,9 @@ const userSlice = createSlice({
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.loggedIn = true;
         state.token = action.payload.token;
-        state.name = action.payload.userName || action.payload.email;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
-        console.log('Redux State after login:', state);
+        state.userName = action.payload.userName; // Ajoutez cette ligne
         state.error = null;
       })
       .addCase(loginAsync.rejected, (state, action) => {
