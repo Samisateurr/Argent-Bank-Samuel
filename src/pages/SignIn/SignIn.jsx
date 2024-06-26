@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginAsync } from '../../slices/userSlice';
 import InputField from '../../components/common/InputField/InputField';
@@ -11,14 +11,22 @@ import '../SignIn/SignIn.scss';
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.user.loggedIn); // Utiliser isAuthenticated
+
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    const savedPassword = localStorage.getItem('rememberedPassword');
+    if (savedEmail) setEmail(savedEmail);
+    if (savedPassword) setPassword(savedPassword);
+  }, []);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleRememberMeChange = (e) => setRememberMe(e.target.checked);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,33 +40,28 @@ const SignIn = () => {
 
     setLoading(true);
     const credentials = { email, password };
-    try {
-      const response = await dispatch(loginAsync(credentials));
-      console.log('API Response:', response); // Log de la réponse de l'API
-      setLoading(false);
-      if (response.payload && response.payload.token) {
-        navigate('/user'); // Redirection après une connexion réussie
+    const result = await dispatch(loginAsync(credentials));
+    setLoading(false);
+    if (result.meta.requestStatus === 'fulfilled') {
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', email);
+        localStorage.setItem('rememberedPassword', password);
       } else {
-        setErrorMessage(response.payload ? response.payload.message : 'Authentication failed');
+        localStorage.removeItem('rememberedEmail');
+        localStorage.removeItem('rememberedPassword');
       }
-    } catch (error) {
-      console.error('Authentication failed:', error);
-      setLoading(false);
-      setErrorMessage('Authentication failed');
+      navigate('/user');
+    } else {
+      setErrorMessage(result.payload.message);
     }
   };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/user'); // Rediriger si déjà authentifié
-    }
-  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (errorMessage) {
       const timer = setTimeout(() => {
         setErrorMessage('');
       }, 5000);
+
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
@@ -86,7 +89,12 @@ const SignIn = () => {
               onChange={handlePasswordChange}
             />
             <div className="input-remember">
-              <input type="checkbox" id="remember-me" />
+              <input
+                type="checkbox"
+                id="remember-me"
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+              />
               <label htmlFor="remember-me">Remember me</label>
             </div>
             <Button type="submit" disabled={loading}>
