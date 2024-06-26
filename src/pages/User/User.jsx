@@ -10,6 +10,8 @@ import '../User/User.scss';
 
 const User = () => {
   const isAuthenticated = useSelector((state) => state.user.loggedIn);
+  const firstName = useSelector((state) => state.user.firstName);
+  const lastName = useSelector((state) => state.user.lastName);
   const navigate = useNavigate();
 
   // Vérifie si l'utilisateur est authentifié, sinon redirige vers la page de connexion
@@ -18,12 +20,16 @@ const User = () => {
     return null; // Peut afficher un loader ou un message de chargement ici
   }
 
+  const userName = `${firstName} ${lastName}`.trim() || 'Tony Jarvis';
+
+  console.log('User Name:', userName); // Log du nom de l'utilisateur
+
   return (
     <>
       <Nav />
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
+          <h1>Welcome back<br />{userName}!</h1>
           <Button className="edit-button">Edit Name</Button>
         </div>
         <h2 className="sr-only">Accounts</h2>

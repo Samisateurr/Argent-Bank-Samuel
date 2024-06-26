@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginAsync } from '../../slices/userSlice';
 import InputField from '../../components/common/InputField/InputField';
@@ -15,6 +15,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.user.loggedIn); // Utiliser isAuthenticated
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -31,21 +32,33 @@ const SignIn = () => {
 
     setLoading(true);
     const credentials = { email, password };
-    const result = await dispatch(loginAsync(credentials));
-    setLoading(false);
-    if (result.success) {
-      navigate('/user');
-    } else {
-      setErrorMessage(result.message);
+    try {
+      const response = await dispatch(loginAsync(credentials));
+      console.log('API Response:', response); // Log de la réponse de l'API
+      setLoading(false);
+      if (response.payload && response.payload.token) {
+        navigate('/user'); // Redirection après une connexion réussie
+      } else {
+        setErrorMessage(response.payload ? response.payload.message : 'Authentication failed');
+      }
+    } catch (error) {
+      console.error('Authentication failed:', error);
+      setLoading(false);
+      setErrorMessage('Authentication failed');
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/user'); // Rediriger si déjà authentifié
+    }
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (errorMessage) {
       const timer = setTimeout(() => {
         setErrorMessage('');
       }, 5000);
-
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
