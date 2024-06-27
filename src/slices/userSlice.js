@@ -12,10 +12,8 @@ export const loginAsync = createAsyncThunk(
       });
       const token = loginResponse.data.body.token;
 
-      // Stocker le token dans le localStorage
       localStorage.setItem('token', token);
 
-      // Récupérer le profil utilisateur avec le token
       const profileResponse = await axiosInstance.post('http://localhost:3001/api/v1/user/profile', {}, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -23,7 +21,6 @@ export const loginAsync = createAsyncThunk(
         }
       });
 
-      // Stocker les informations de l'utilisateur dans le localStorage
       localStorage.setItem('user', JSON.stringify(profileResponse.data.body));
 
       return { token, ...profileResponse.data.body };
@@ -62,6 +59,32 @@ export const checkAuthAsync = createAsyncThunk(
   }
 );
 
+export const updateUserName = createAsyncThunk(
+  'user/updateUserName',
+  async ({ userName }, { getState, rejectWithValue }) => {
+    const { token } = getState().user;
+
+    try {
+      const response = await axiosInstance.put('http://localhost:3001/api/v1/user/profile', { userName }, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      localStorage.setItem('user', JSON.stringify(response.data.body));
+
+      return response.data.body;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue({ message: 'Failed to update username' });
+      }
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -71,7 +94,7 @@ const userSlice = createSlice({
     loggedIn: false,
     token: null,
     error: null,
-    isLoading: true, // Ajout de isLoading pour gérer l'état de chargement
+    isLoading: true,
   },
   reducers: {
     logout(state) {
@@ -111,6 +134,14 @@ const userSlice = createSlice({
       .addCase(checkAuthAsync.rejected, (state, action) => {
         state.error = action.payload ? action.payload.message : 'Failed to authenticate';
         state.isLoading = false;
+      })
+      .addCase(updateUserName.fulfilled, (state, action) => {
+        state.userName = action.payload.userName;
+        state.firstName = action.payload.firstName; // Assuming this is still needed for display
+        state.lastName = action.payload.lastName;   // Assuming this is still needed for display
+      })
+      .addCase(updateUserName.rejected, (state, action) => {
+        state.error = action.payload ? action.payload.message : 'Failed to update username';
       });
   },
 });
