@@ -40,8 +40,12 @@ export const checkAuthAsync = createAsyncThunk(
   'user/checkAuthAsync',
   async (_, { rejectWithValue }) => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      return rejectWithValue({ message: 'No token found' });
+    const rememberMe = localStorage.getItem('rememberMe');
+    
+    if (!token || !rememberMe) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      return rejectWithValue({ message: 'No token found or remember me not selected' });
     }
 
     try {
@@ -107,6 +111,7 @@ const userSlice = createSlice({
       state.userName = '';
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('rememberMe');  // Remove rememberMe flag on logout
     },
   },
   extraReducers: (builder) => {

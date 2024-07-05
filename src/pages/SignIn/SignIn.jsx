@@ -46,9 +46,11 @@ const SignIn = () => {
       if (rememberMe) {
         localStorage.setItem('rememberedEmail', email);
         localStorage.setItem('rememberedPassword', password);
+        localStorage.setItem('rememberMe', 'true');
       } else {
         localStorage.removeItem('rememberedEmail');
         localStorage.removeItem('rememberedPassword');
+        localStorage.removeItem('rememberMe');
       }
       navigate('/user');
     } else {
