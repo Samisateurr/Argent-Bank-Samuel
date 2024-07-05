@@ -1,5 +1,6 @@
 import React from 'react';
-import '../Feature/Feature.scss'
+import PropTypes from 'prop-types'; 
+import '../Feature/Feature.scss';
 
 function Feature({ imgSrc, imgAlt, title, description }) {
   return (
@@ -10,5 +11,12 @@ function Feature({ imgSrc, imgAlt, title, description }) {
     </div>
   );
 }
+
+Feature.propTypes = {
+  imgSrc: PropTypes.string.isRequired, 
+  imgAlt: PropTypes.string.isRequired, 
+  title: PropTypes.string.isRequired,  
+  description: PropTypes.string.isRequired 
+};
 
 export default Feature;

@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkAuthAsync());
-  }, [dispatch]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;

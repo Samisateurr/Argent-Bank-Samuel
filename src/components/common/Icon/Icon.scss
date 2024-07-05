@@ -1,3 +1,11 @@
 .icon {
     margin-right: 0.5rem;
   }
+
+  .fa {
+    text-decoration: none !important;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+  

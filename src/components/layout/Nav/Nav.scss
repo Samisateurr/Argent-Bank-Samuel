@@ -22,77 +22,54 @@
     align-items: center;
   }
 
-  .main-nav-item {
+  .nav-button {
     text-decoration: none;
-    margin-right: 0.5rem;
+    margin-right: 0.1rem;
     font-weight: bold;
     display: flex;
     align-items: center;
-    color: $primary-color;
-
-    &:hover {
-      text-decoration: underline;
-      color: #00bc77;
-    }
-
-    .fa {
-      margin-right: 0.5rem;
-    }
-  }
-
-  .sign-in-button {
-    text-decoration: none;
-    margin-right: 0.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-
-    .fa {
-      margin-right: 0.5rem;
-    }
-
-    &:hover {
-      text-decoration: underline;
-      color: #00bc77;
-    }
-  }
-
-  .sign-out-button {
-    text-decoration: none;
-    margin-right: 0.5rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+    justify-content: center; /* Center content horizontally */
     color: $primary-color;
     cursor: pointer;
     border: none;
     background: none;
+    font-size: 1rem;
+    padding: 8px 15px;
+    height: 48px; /* Set a fixed height */
+    box-sizing: border-box;
 
     .fa {
-      margin-right: 0.5rem;
+      margin-right: 5px;
+      font-size: 1rem; /* Ensure icon size is consistent */
+      line-height: 1.5; /* Ensure line height does not affect alignment */
+      text-decoration: none !important; /* Remove underline for icons */
     }
 
     &:hover {
       text-decoration: underline;
       color: #00bc77;
+    }
+
+    &:hover .fa {
+      text-decoration: none !important; /* Ensure underline is not added on hover for icons */
     }
   }
 
   .user-name-button {
+    margin-right: 0px;
+    padding-right: 0px;
+  }
+
+  .user-name-button,
+  .sign-out-button {
+    @extend .nav-button;
+  }
+}
+
+/* Apply a global rule to ensure all <i> tags have no text decoration */
+i {
+  text-decoration: none;
+  &:hover {
     text-decoration: none;
-    margin-right: 0.5rem;
-    font-weight: bold;
-    color: $primary-color;
-    display: flex;
-    align-items: center;
-
-    .fa {
-      margin-right: 0.5rem;
-    }
-
-    &:hover {
-      text-decoration: underline;
-      color: #00bc77;
-    }
   }
 }

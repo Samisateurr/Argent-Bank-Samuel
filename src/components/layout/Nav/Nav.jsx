@@ -24,18 +24,18 @@ function Nav() {
       <div className="nav-items">
         {isAuthenticated ? (
           <>
-            <Link to="/user" className="main-nav-item user-name-button">
-              <Icon name="user-circle" />
+            <Link to="/user" className="main-nav-item nav-button user-name-button">
+              <Icon name="user-circle" style={{ fontSize: '1.5rem' }} />
               {userName}
             </Link>
-            <button onClick={handleLogout} className="main-nav-item sign-out-button">
-              <Icon name="sign-out" />
+            <button onClick={handleLogout} className="main-nav-item nav-button sign-out-button">
+              <Icon name="sign-out" style={{ fontSize: '1.5rem' }} />
               Sign Out
             </button>
           </>
         ) : (
-          <Link to="/sign-in" className="main-nav-item sign-in-button">
-            <Icon name="user-circle" />
+          <Link to="/sign-in" className="main-nav-item nav-button sign-in-button">
+            <Icon name="user-circle" style={{ fontSize: '1.5rem' }} />
             Sign In
           </Link>
         )}
@@ -45,3 +45,4 @@ function Nav() {
 }
 
 export default Nav;
+

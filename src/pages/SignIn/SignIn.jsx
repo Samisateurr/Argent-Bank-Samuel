@@ -75,7 +75,7 @@ const SignIn = () => {
           <h1>Sign In</h1>
           <form onSubmit={handleSubmit}>
             <InputField
-              label="Email"
+              label="Username"
               type="email"
               id="email"
               value={email}
@@ -97,7 +97,7 @@ const SignIn = () => {
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" className="full-width" disabled={loading}>
               {loading ? 'Loading...' : 'Sign In'}
             </Button>
             {errorMessage && <div className="error-message">{errorMessage}</div>}

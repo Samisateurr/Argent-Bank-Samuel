@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../api/axiosConfig';
 
+const API_BASE_URL = 'http://localhost:3001/api/v1';
+
 export const loginAsync = createAsyncThunk(
   'user/loginAsync',
   async (credentials, { rejectWithValue }) => {
     try {
-      const loginResponse = await axiosInstance.post('http://localhost:3001/api/v1/user/login', credentials, {
+      const loginResponse = await axiosInstance.post(`${API_BASE_URL}/user/login`, credentials, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -14,7 +16,7 @@ export const loginAsync = createAsyncThunk(
 
       localStorage.setItem('token', token);
 
-      const profileResponse = await axiosInstance.post('http://localhost:3001/api/v1/user/profile', {}, {
+      const profileResponse = await axiosInstance.post(`${API_BASE_URL}/user/profile`, {}, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -43,7 +45,7 @@ export const checkAuthAsync = createAsyncThunk(
     }
 
     try {
-      const profileResponse = await axiosInstance.post('http://localhost:3001/api/v1/user/profile', {}, {
+      const profileResponse = await axiosInstance.post(`${API_BASE_URL}/user/profile`, {}, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -65,7 +67,7 @@ export const updateUserName = createAsyncThunk(
     const { token } = getState().user;
 
     try {
-      const response = await axiosInstance.put('http://localhost:3001/api/v1/user/profile', { userName }, {
+      const response = await axiosInstance.put(`${API_BASE_URL}/user/profile`, { userName }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
