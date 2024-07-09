@@ -10,31 +10,34 @@ import { updateUserName } from '../../slices/userSlice';
 import '../User/User.scss';
 
 const User = () => {
-  const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.user.loggedIn);
-  const firstName = useSelector((state) => state.user.firstName);
-  const lastName = useSelector((state) => state.user.lastName);
-  const userName = useSelector((state) => state.user.userName);
-  const navigate = useNavigate();
+  const dispatch = useDispatch(); // Hook Redux pour dispatcher des actions
+  const isAuthenticated = useSelector((state) => state.user.loggedIn); // Vérifie si l'utilisateur est connecté
+  const firstName = useSelector((state) => state.user.firstName); // Récupère le prénom de l'utilisateur
+  const lastName = useSelector((state) => state.user.lastName); // Récupère le nom de famille de l'utilisateur
+  const userName = useSelector((state) => state.user.userName); // Récupère le nom d'utilisateur
+  const navigate = useNavigate(); // Hook pour naviguer entre les pages
 
-  // State for managing the edit form display
-  const [isEditing, setIsEditing] = useState(false);
-  const [newUserName, setNewUserName] = useState(userName);
+  const [isEditing, setIsEditing] = useState(false); // État pour gérer l'édition des informations de l'utilisateur
+  const [newUserName, setNewUserName] = useState(userName); // État pour le nouveau nom d'utilisateur
 
+  // Redirige vers la page de connexion si l'utilisateur n'est pas authentifié
   if (!isAuthenticated) {
-    navigate('/sign-in'); // Redirect to the sign-in page
-    return null; // Optionally show a loading message here
+    navigate('/sign-in'); 
+    return null; 
   }
 
+  // Fonction pour activer le mode édition
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
+  // Fonction pour sauvegarder les modifications du nom d'utilisateur
   const handleSaveClick = async () => {
     await dispatch(updateUserName({ userName: newUserName }));
     setIsEditing(false);
   };
 
+  // Fonction pour annuler les modifications et revenir au mode non-édition
   const handleCancelClick = () => {
     setNewUserName(userName);
     setIsEditing(false);
